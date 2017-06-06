@@ -12,6 +12,9 @@ import           Control.Monad.Except       (ExceptT)
 import           Control.Monad.Reader       (ReaderT, runReaderT)
 import           Database.Persist.Sql       (runSqlPool)
 import           Network.Wai                (Application)
+import           Network.Wai.Middleware.Cors (cors, corsRequestHeaders,
+                                              simpleCorsResourcePolicy,
+                                              simpleHeaders)
 import           Network.Wai.Handler.Warp   (run)
 import           Safe                       (readMay)
 import           Servant
@@ -52,7 +55,9 @@ runServer = do
   let cfg = Config { getPool = pool, getEnv = env }
       logger = setLogger env
   runSqlPool doMigrations pool
-  run port $ logger $ app cfg
+  run port $ cors (const $ Just policy) $ logger $ app cfg
+    where
+      policy = simpleCorsResourcePolicy { corsRequestHeaders = simpleHeaders }
 
 -- | Looks up a setting in the environment, with a provided default, and
 -- 'read's that information into the inferred type.

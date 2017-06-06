@@ -33,7 +33,7 @@ instance Default (ColumnCfg a handler) where
   def = ColumnCfg mempty mempty True (const mempty)
 
 defCol :: Text -> (a -> ReactElementM handler ()) -> ColumnCfg a handler
-defCol name selector = ColumnCfg name name True selector
+defCol name = ColumnCfg name name True
 
 table_ :: TableCfg a handler -> [a] -> ReactElementM handler ()
 table_ TableCfg{..} xs =
@@ -50,7 +50,7 @@ table_ TableCfg{..} xs =
     rowHeader ColumnCfg{..} =
       foreign_ "Th" [ "column" &= colName ] (elemText colName)
     rowValue cs x =
-      foreign_ "Tr" [] $ do
+      foreign_ "Tr" [] $
         mapM_ (\ColumnCfg{..} ->
           foreign_ "Td" [ "column" &= colName ] (colSelector x)) cs
     filterableColumns =
