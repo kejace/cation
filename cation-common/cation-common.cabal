@@ -21,7 +21,7 @@ library
                      , Cation.Common.Api.Combinators
                      , Cation.Common.Api.Contacts
   build-depends:       aeson
-                     , base >= 4.7 && < 5
+                     , base >= 4.9 && < 5
                      , deepseq
                      , servant
                      , text

@@ -22,13 +22,15 @@ library
                      , Cation.Client.Components.Contacts.View
                      , Cation.Client.GHCi
   build-depends:       aeson
-                     , base >= 4.7 && < 5
+                     , base >= 4.9 && < 5
                      , cation-common
                      , data-default
                      , deepseq
                      , ghcjs-base
-                     , react-flux
-                     , react-flux-servant
+                     , react-hs
+                     , react-hs-servant
+--                     , react-flux
+--                     , react-flux-servant
                      , servant
                      , text
                      , time
