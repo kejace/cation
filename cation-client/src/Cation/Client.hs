@@ -9,5 +9,6 @@ import           React.Flux.Ajax
 app :: IO ()
 app = do
   initAjax
-  alterStore contactsStore LoadContacts
-  reactRender "app" contactsApp ()
+  --alterStore contactsStore LoadContacts
+  registerInitialStore $ initialContacts
+  reactRenderView "app" contactsApp --()

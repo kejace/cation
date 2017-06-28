@@ -1,5 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE DataKinds         #-}
+{-# LANGUAGE TypeApplications  #-}
+
 module Cation.Client.Components.Contacts.View where
 
 import           Cation.Client.Components.Contacts.Store
@@ -9,11 +12,8 @@ import           Data.Default
 import           Data.Maybe                              (fromMaybe)
 import           React.Flux                              hiding (table_)
 
-contactsApp :: ReactView ()
-contactsApp = defineControllerView "contactsApp" contactsStore render
-  where
-    render :: ContactsStore -> () -> ReactElementM handler ()
-    render state () =
+contactsApp :: View '[] --()
+contactsApp = mkControllerView @'[StoreArg ContactsStore] "contactsApp" $ \state ->
       div_ [ "className" $= "panel panel-default" ] $ do
         div_ [ "className" $= "panel-heading" ] $
           div_ [ "className" $= "container-fluid" ] $

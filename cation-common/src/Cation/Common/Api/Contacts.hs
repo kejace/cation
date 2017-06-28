@@ -29,7 +29,7 @@ data Contact = Contact
   , contactLastName  :: Text
   , contactEmail     :: Text
   , contactPhone     :: Maybe Text
-  } deriving (Generic, NFData)
+  } deriving (Eq, Generic, NFData)
 
 $(deriveJSON (jsonOpts 7) ''Contact)
 
